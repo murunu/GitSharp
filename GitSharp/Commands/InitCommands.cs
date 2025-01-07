@@ -1,12 +1,16 @@
-﻿namespace GitSharp.Commands;
+﻿using GitSharp.Helpers;
 
-public class InitCommands
+namespace GitSharp.Commands;
+
+public class InitCommands(CommitBuilder commitBuilder)
 {
-    public void Init()
+    public async Task Init()
     {
         Console.WriteLine("Initializing GitSharp repository...");
         
         CreateDirectories();
+
+        await commitBuilder.CreateCommit(true);
         
         Console.WriteLine("GitSharp repository initialized.");
     }

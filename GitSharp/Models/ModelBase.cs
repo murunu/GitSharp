@@ -21,10 +21,16 @@ public abstract class ModelBase
         }
     }
 
-    public virtual async Task CreateHash(Stream source)
+    public virtual async Task CreateHash(Stream source, bool save = false)
     {
         await using var stream = new MemoryStream();
         await source.CopyToAsync(stream);
+
+        await CreateHash(stream, save);
+    }
+    
+    public virtual async Task CreateHash(MemoryStream stream, bool save = false)
+    {
         if (!SHA1.TryHashData(stream.ToArray(), Hash, out _))
         {
             throw new Exception("Failed to create hash.");
@@ -35,6 +41,7 @@ public abstract class ModelBase
 
         VerifyHash(Hash);
 
+        if(!save) return;
         await Save(stream);
     }
 
