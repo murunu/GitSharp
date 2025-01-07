@@ -31,10 +31,10 @@ public class ChangesCommands(
 
         Console.WriteLine("Length of new tree:\t" + newTree.Entries.Count);
         Console.WriteLine("Length of current tree:\t" + currentTree.Entries.Count);
-        Compare(newTree, currentTree);
+        await Compare(newTree, currentTree);
     }
 
-    private void Compare(Tree newTree, Tree currentTree)
+    private async Task Compare(Tree newTree, Tree currentTree)
     {
         // Get changes between keys of both trees
         currentTree.Entries.Keys.Except(newTree.Entries.Keys).ToList().ForEach(x => Console.WriteLine($"Removed: {x}"));
@@ -43,11 +43,22 @@ public class ChangesCommands(
         {
             if (currentTree.Entries.Values.Any(x => x.HashString == model.HashString)) 
                 continue;
-
-            Console.WriteLine(
-                currentTree.Entries.ContainsKey(file)
-                    ? $"Changed: {file}"
-                    : $"Added: {file}");
+            
+            if(currentTree.Entries.TryGetValue(file, out var entry))
+            {
+                Console.WriteLine($"Changed: {file}");
+                
+                
+                Console.WriteLine("Old contents:");
+                await GetByHash(entry.HashString);
+                
+                Console.WriteLine("New contents:");
+                await GetByHash(model.HashString);
+            }
+            else
+            {
+                Console.WriteLine($"Added: {file}");
+            }
         }
     }
 
