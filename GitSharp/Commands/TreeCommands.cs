@@ -13,6 +13,6 @@ public class TreeCommands(ILogger<TreeCommands> logger,
     public async Task CreateTree()
     {
         // Create initial commit.
-        await commitBuilder.CreateCommit(true);
+        await commitBuilder.CreateCommit("initial commit",true);
     }
 }

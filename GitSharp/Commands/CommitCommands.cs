@@ -13,7 +13,7 @@ public class CommitCommands(ILogger<CommitCommands> logger, CommitBuilder commit
     {
         logger.LogInformation("Current hash: {CurrentHash}", HeadHelper.GetCurrentCommitHash());
 
-        await commitBuilder.CreateCommit(true);
+        await commitBuilder.CreateCommit(message, true);
         
         logger.LogInformation("Commit created");
         logger.LogInformation("New hash: {NewHash}", HeadHelper.GetCurrentCommitHash());

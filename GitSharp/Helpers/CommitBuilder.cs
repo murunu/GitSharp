@@ -7,7 +7,7 @@ namespace GitSharp.Helpers;
 
 public class CommitBuilder(ILogger<CommitBuilder> logger, TreeBuilder treeBuilder)
 {
-    public async Task<Commit> CreateCommit(bool save = false)
+    public async Task<Commit> CreateCommit(string message, bool save = false)
     {
         if(!DirectoryVerifiers.FolderInitialized())
         {
@@ -19,7 +19,7 @@ public class CommitBuilder(ILogger<CommitBuilder> logger, TreeBuilder treeBuilde
         {
             Author = "Author",
             Committer = "Committer",
-            Message = "Message",
+            Message = message,
             ParentHash = Convert.FromHexString(HeadHelper.GetCurrentCommitHash())
         };
 

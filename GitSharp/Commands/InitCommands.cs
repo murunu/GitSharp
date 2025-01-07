@@ -10,7 +10,7 @@ public class InitCommands(CommitBuilder commitBuilder)
         
         CreateDirectories();
 
-        await commitBuilder.CreateCommit(true);
+        await commitBuilder.CreateCommit("initial commit", true);
         
         Console.WriteLine("GitSharp repository initialized.");
     }
