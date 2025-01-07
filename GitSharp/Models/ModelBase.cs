@@ -7,17 +7,13 @@ namespace GitSharp.Models;
 /// <summary>
 /// Name To be changed to something more meaningful.
 /// </summary>
-public class ModelBase
+public abstract class ModelBase
 {
     public byte[] Hash { get; protected set; } = new byte[20];
 
     public string HashString => Convert.ToHexString(Hash);
-    
-    public byte[]? ParentHash { get; protected set; }
 
-    private readonly MemoryStream _stream = new();
-    
-    protected static void VerifyHash(byte[] hash)
+    private static void VerifyHash(byte[] hash)
     {
         if (!hash.Length.Equals(20))
         {
@@ -25,28 +21,24 @@ public class ModelBase
         }
     }
 
-    public async Task CreateHash(Stream source)
+    public virtual async Task CreateHash(Stream source)
     {
-        await source.CopyToAsync(_stream);
-        if (!SHA1.TryHashData(_stream.ToArray(), Hash, out var written))
+        await using var stream = new MemoryStream();
+        await source.CopyToAsync(stream);
+        if (!SHA1.TryHashData(stream.ToArray(), Hash, out _))
         {
-            Console.WriteLine(written);
             throw new Exception("Failed to create hash.");
         }
 
-        _stream.Position = 0;
+        // Reset the stream position to the beginning.
+        stream.Position = 0;
 
         VerifyHash(Hash);
+
+        await Save(stream);
     }
 
-    public async Task SetParentHash(Stream source)
-    {
-        ParentHash = await SHA1.HashDataAsync(source);
-
-        VerifyHash(ParentHash);
-    }
-
-    public async Task Save()
+    private async Task Save(MemoryStream stream)
     {
         if (!Directory.Exists(".gitsharp/objects"))
         {
@@ -61,11 +53,9 @@ public class ModelBase
         
         await using var zlibStream = new ZLibStream(targetStream, CompressionMode.Compress);
         
-        await _stream.CopyToAsync(zlibStream);
+        await stream.CopyToAsync(zlibStream);
         
-        _stream.Close();
-        await _stream.DisposeAsync();
-        
+        stream.Close();
         zlibStream.Close();
         targetStream.Close();
     }

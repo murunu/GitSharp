@@ -1,5 +1,6 @@
 ﻿namespace GitSharp.Models;
 
-public class Blob : ModelBase
+public class Tag
 {
+    
 }

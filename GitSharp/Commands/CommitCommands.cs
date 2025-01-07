@@ -1,37 +1,17 @@
 ﻿using System.IO.Compression;
+using System.Text.Json;
 using Cocona;
 using GitSharp.Models;
+using Microsoft.Extensions.Logging;
 
 namespace GitSharp.Commands;
 
-public class CommitCommands
+public class CommitCommands(ILogger<CommitCommands> logger)
 {
     [Command(nameof(Commit))]
     public async Task Commit([Argument] string message)
     {
-        Console.WriteLine($"Committing with message: {message}");
-    }
-
-    public async Task CreateTree()
-    {
-        if(!Directory.Exists(".gitsharp"))
-        {
-            Directory.CreateDirectory(".gitsharp");
-            Directory.CreateDirectory(".gitsharp/objects");
-            Directory.CreateDirectory(".gitsharp/refs");
-        }
-        
-        var files = Directory.EnumerateFiles(Directory.GetCurrentDirectory());
-
-        var tree = new Tree();
-        foreach (var f in files)
-        {
-            var blob = new Blob(tree.Hash);
-            await blob.CreateHash(File.OpenRead(f));
-            await blob.Save();
-
-            Console.WriteLine($"Created blob for file {f} with hash: {blob.HashString}");
-        }
+        logger.LogInformation("Committing with message: {Message}", message);
     }
 
     public async Task Status()
@@ -44,7 +24,7 @@ public class CommitCommands
         var path = $".gitsharp/objects/{hash[..2]}/{hash[2..]}";
         if (!File.Exists(path))
         {
-            Console.WriteLine("Object not found.");
+            logger.LogInformation("Object not found");
             return;
         }
 
