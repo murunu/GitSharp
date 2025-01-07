@@ -24,7 +24,7 @@ public class Commit : ModelBase
             (ParentHash is null ? "" : $"parent {ParentHashString}\n") +
             $"author {Author} {CommitDate:O}\n" +
             $"committer {Committer} {CommitDate:O}\n\n" +
-            $"message Message"));
+            $"message {Message}"));
         
         await CreateHash(memoryStream, save);
 
