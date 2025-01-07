@@ -26,11 +26,6 @@ public class ChangesCommands(
 
         await GetByHash(HeadHelper.GetCurrentCommitHash());
 
-        Console.WriteLine("New tree hash:\t\t" + newTree.HashString);
-        Console.WriteLine("Current tree hash:\t" + currentTree.HashString);
-
-        Console.WriteLine("Length of new tree:\t" + newTree.Entries.Count);
-        Console.WriteLine("Length of current tree:\t" + currentTree.Entries.Count);
         await Compare(newTree, currentTree);
     }
 
