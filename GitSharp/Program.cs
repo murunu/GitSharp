@@ -1,18 +1,39 @@
 ﻿using Cocona;
-using GitSharp.Commands;
-using GitSharp.Helpers;
-using Microsoft.Extensions.DependencyInjection;
+using GitSharp.Extensions;
+using GitSharp.Filters;
+using GitSharp.Formatters;
+using GitSharp.Services.Extensions;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 
-var builder = CoconaApp.CreateBuilder();
+namespace GitSharp;
 
-builder.Services.AddSingleton<TreeBuilder>();
-builder.Services.AddSingleton<CommitBuilder>();
-builder.Services.AddSingleton<TreeCommands>();
+public static class Program
+{
+    public static async Task Main(string[] args)
+    {
+        var builder = CoconaApp.CreateBuilder(args);
 
-var app = builder.Build();
+        builder.Logging
+            .AddConsoleFormatter<CustomFormatter, SimpleConsoleFormatterOptions>();
 
-app.AddCommands<CommitCommands>();
-app.AddCommands<InitCommands>();
-app.AddCommands<ChangesCommands>();
+        builder.Configuration.AddJsonFile("appsettings.json", optional: true);
 
-app.Run();
+        if (builder.Environment.IsDevelopment())
+        {
+            builder.Configuration.AddJsonFile($"appsettings.{Environments.Development}.json", optional: true);
+        }
+
+        builder.Services.AddGitSharpServices();
+
+        var app = builder.Build();
+
+        app.UseFilter(new DirectoryInitializedFilter());
+
+        app.AddGitSharpCommands();
+
+        await app.RunAsync();
+    }
+}

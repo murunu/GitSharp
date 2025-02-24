@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "Init": {
+      "commandName": "Executable",
+      "commandLineArgs": "init",
+      "executablePath": "$(MSBuildProjectDirectory)/bin/Debug/net9.0/GitSharp.exe",
+      "workingDirectory": "$(MSBuildProjectDirectory)/RunFolder",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "HashObject": {
+      "commandName": "Executable",
+      "commandLineArgs": "hash-object -w \"test.txt\"",
+      "executablePath": "$(MSBuildProjectDirectory)/bin/Debug/net9.0/GitSharp.exe",
+      "workingDirectory": "$(MSBuildProjectDirectory)/RunFolder",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "ReadObject": {
+      "commandName": "Executable",
+      "commandLineArgs": "cat-file -p \"2892a6877e8aff77fe3359efd9905afc2c13ee59\"",
+      "executablePath": "$(MSBuildProjectDirectory)/bin/Debug/net9.0/GitSharp.exe",
+      "workingDirectory": "$(MSBuildProjectDirectory)/RunFolder",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
