@@ -14,17 +14,17 @@ public static class CommandExtensions
             typeof(CatFileCommands),
             typeof(InitCommands)
         ];
-    
+
     public static CoconaApp AddGitSharpCommands(this CoconaApp app)
     {
         foreach (var command in Commands)
         {
             app.AddCommands(command);
         }
-        
+
         return app;
     }
-    
+
     public static IServiceCollection AddGitSharpCommands(this IServiceCollection services)
     {
         foreach (var command in Commands)

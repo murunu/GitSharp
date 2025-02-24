@@ -11,7 +11,7 @@ public class InitCommands(ILogger<InitCommands> logger)
         Directory.CreateDirectory(".gitsharp/refs/heads");
         Directory.CreateDirectory(".gitsharp/refs/remotes");
         Directory.CreateDirectory(".gitsharp/refs/tags");
-        
+
         logger.LogInformation("Initialized GitSharp repository");
     }
 }

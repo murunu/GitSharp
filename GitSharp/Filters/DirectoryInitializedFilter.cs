@@ -13,7 +13,7 @@ public class DirectoryInitializedFilter : ICommandFilter
         {
             return await next(ctx);
         }
-        
+
         if (!DirectoryVerifiers.FolderInitialized(Directory.GetCurrentDirectory()))
         {
             Console.WriteLine("GitSharp repository not initialized.");
