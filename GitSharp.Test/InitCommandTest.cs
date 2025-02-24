@@ -8,7 +8,7 @@ namespace GitSharp.Test;
 public class InitCommandTest(GitSharpFixture fixture) : TestBase(fixture)
 {
     [Fact]
-    public async Task InitCommand_Should_Initialize_GitSharp_Directory()
+    public void InitCommand_Should_Initialize_GitSharp_Directory()
     {
         // Arrange
         // Setup directory
@@ -17,7 +17,7 @@ public class InitCommandTest(GitSharpFixture fixture) : TestBase(fixture)
         // Act
         var initCommand = ServiceProvider.GetRequiredService<InitCommands>();
 
-        await initCommand.Init();
+        initCommand.Init();
 
         // Assert
         Directory.Exists(".gitsharp/objects").ShouldBeTrue();

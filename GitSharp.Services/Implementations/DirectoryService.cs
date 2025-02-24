@@ -1,16 +1,14 @@
-﻿using GitSharp.Services.Interfaces;
+﻿using System.Diagnostics.CodeAnalysis;
+using GitSharp.Services.Interfaces;
 
 namespace GitSharp.Services.Implementations;
 
+/// <summary>
+/// Service to handle directory operations.
+/// </summary>
+[ExcludeFromCodeCoverage]
 public class DirectoryService : IDirectoryService
 {
-    private string GetCurrentDirectory()
-    {
-        return Directory.GetCurrentDirectory();
-    }
-
-    public string GetPath(params string[] paths)
-    {
-        return Path.Combine([GetCurrentDirectory(), ..paths]);
-    }
+    public string GetPath(params string[] paths) 
+        => Path.Combine([Directory.GetCurrentDirectory(), ..paths]);
 }

@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Cocona;
+﻿using Cocona;
 using GitSharp.Commands;
 using GitSharp.Services.Extensions;
 using Microsoft.Extensions.DependencyInjection;

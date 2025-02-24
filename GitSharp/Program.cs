@@ -26,7 +26,7 @@ public static class Program
             builder.Configuration.AddJsonFile($"appsettings.{Environments.Development}.json", optional: true);
         }
 
-        builder.Services.AddGitSharpServices();
+        builder.Services.AddGitSharpServices(builder.Configuration);
 
         var app = builder.Build();
 

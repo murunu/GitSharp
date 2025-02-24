@@ -4,18 +4,21 @@ using Microsoft.Extensions.Logging;
 
 namespace GitSharp.Commands;
 
-public class CatFileCommands(IHashObjectService hashObjectService, ILogger<CatFileCommands> logger)
+public class CatFileCommands(
+    ICatFileService catFileService,
+    IFileSystemService fileSystemService,
+    ILogger<CatFileCommands> logger)
 {
     public async Task<string> CatFile(
-        [Argument] string hash,
-        [Option('t')] bool showType,
-        [Option('p')] bool prettyPrint,
-        [Option('s')] bool size)
+        [Argument(Description = "The name of the object to show.")] string hash,
+        [Option('t', Description = "Instead of the content, show the object type identified by the hash.")] bool showType,
+        [Option('p', Description = "Pretty-print the contents of the hash based on its type.")] bool prettyPrint,
+        [Option('s', Description = "Instead of the content, show the object size identified by the hash")] bool size)
     {
         if (showType)
         {
-            var result = await hashObjectService.GetObjectTypeAsync(hash);
- 
+            var result = await catFileService.GetObjectTypeAsync(hash);
+
             logger.LogInformation("{Result}", result);
 
             return result.ToString();
@@ -23,25 +26,24 @@ public class CatFileCommands(IHashObjectService hashObjectService, ILogger<CatFi
 
         if (prettyPrint)
         {
-            var result = await hashObjectService.ReadObjectAsync(hash);
+            var result = await fileSystemService.ReadObjectAsync(hash);
 
             logger.LogInformation("{Result}", result);
 
             return result;
-
         }
 
         if (size)
         {
-            var result = await hashObjectService.GetSizeAsync(hash);
-            
+            var result = await catFileService.GetSizeAsync(hash);
+
             logger.LogInformation("{Result}", result);
 
             return result.ToString();
         }
 
         logger.LogInformation("No option selected");
-        
+
         return "No option selected";
     }
 }

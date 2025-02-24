@@ -4,7 +4,7 @@ namespace GitSharp.Commands;
 
 public class InitCommands(ILogger<InitCommands> logger)
 {
-    public async Task Init()
+    public void Init()
     {
         // Create all folders.
         Directory.CreateDirectory(".gitsharp/objects");
