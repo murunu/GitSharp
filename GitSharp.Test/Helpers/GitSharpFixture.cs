@@ -27,6 +27,9 @@ public class GitSharpFixture
         
         directoryServiceMock.Setup(p => p.GetPath(It.IsAny<string[]>()))
             .Returns<string[]>(x => Path.Combine([DirectoryHelpers.TestDirectory, ..x]));
+        
+        directoryServiceMock.Setup(p => p.IsInitialized)
+            .Returns(true);
 
         services.AddSingleton(directoryServiceMock.Object);
         

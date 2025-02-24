@@ -1,4 +1,5 @@
-﻿using GitSharp.Services.Implementations;
+﻿using GitSharp.Services.Configuration;
+using GitSharp.Services.Implementations;
 using GitSharp.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +14,8 @@ public static class ServiceCollectionExtensions
         // Check if configuration is set.
         if (configuration is not null)
         {
+            services.Configure<GitSharpConfiguration>(configuration.GetSection("GitSharp"));
+
             var gitSharpConfiguration = configuration.GetSection("GitSharp").Get<GitSharpConfiguration>();
 
             if (gitSharpConfiguration is {UseSha2: true})
@@ -22,6 +25,8 @@ public static class ServiceCollectionExtensions
         }
         else
         {
+            services.Configure<GitSharpConfiguration>(_ => { });
+            
             services.AddSha1HashObjectService();
         }
 
@@ -42,9 +47,4 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IHashObjectService, Sha2HashObjectService>();
     }
 
-}
-
-public class GitSharpConfiguration
-{
-    public bool UseSha2 { get; set; }
 }

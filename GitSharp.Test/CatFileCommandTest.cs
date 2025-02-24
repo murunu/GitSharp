@@ -55,6 +55,10 @@ public class CatFileCommandTest(GitSharpFixture fixture) : TestBase(fixture)
         // Setup directory
         await DirectoryHelpers.SetupTestDirectoryWithTestFileAsync();
 
+        // Initialize directory
+        var initCommand = ServiceProvider.GetRequiredService<InitCommands>();
+        initCommand.Init();
+        
         var hashObjectCommand = ServiceProvider.GetRequiredService<HashObjectCommands>();
 
         var hash = await hashObjectCommand.HashObject(true, FileTypes.Blob, "test.txt");
