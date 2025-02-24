@@ -6,6 +6,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitSharp.Services", "GitSha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitSharp.Test", "GitSharp.Test\GitSharp.Test.csproj", "{3D808D1A-403D-4CD7-A7F9-535B34114D94}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{70EB86F7-2A42-43A0-95FF-31F32FBE5F20}"
+	ProjectSection(SolutionItems) = preProject
+		common.props = common.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{51DF3084-2634-4235-985F-3B2ECB59C6E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,5 +33,8 @@ Global
 		{3D808D1A-403D-4CD7-A7F9-535B34114D94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{D722E76C-367B-4E58-A0ED-43218E9A1F07} = {51DF3084-2634-4235-985F-3B2ECB59C6E3}
+		{5B19E3A1-C132-495B-8D1D-F5FB640B6963} = {51DF3084-2634-4235-985F-3B2ECB59C6E3}
+		{3D808D1A-403D-4CD7-A7F9-535B34114D94} = {51DF3084-2634-4235-985F-3B2ECB59C6E3}
 	EndGlobalSection
 EndGlobal
