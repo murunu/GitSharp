@@ -1,4 +1,5 @@
-﻿using GitSharp.Services.Configuration;
+﻿using GitSharp.Serializers.Extensions;
+using GitSharp.Services.Configuration;
 using GitSharp.Services.Implementations;
 using GitSharp.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
@@ -34,6 +35,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IFileSystemService, FileSystemService>();
         services.AddSingleton<ICatFileService, CatFileService>();
 
+        services.AddSerializers();
         return services;
     }
 

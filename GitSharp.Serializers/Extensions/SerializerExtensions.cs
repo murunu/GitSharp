@@ -7,7 +7,7 @@ namespace GitSharp.Serializers.Extensions;
 
 public static class SerializerExtensions
 {
-    public static IServiceCollection AddSerializerServices(this IServiceCollection services)
+    public static IServiceCollection AddSerializers(this IServiceCollection services)
     {
         services.AddSerializer<ITreeSerializer, TreeSerializer, Tree>();
 
