@@ -1,29 +1,22 @@
-﻿using GitSharp.Helpers;
+﻿using GitSharp.Services.Configuration;
+using GitSharp.Services.Interfaces;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace GitSharp.Commands;
 
-public class InitCommands(CommitBuilder commitBuilder)
+public class InitCommands(IOptions<GitSharpConfiguration> gitSharpConfiguration, IDirectoryService directoryService, ILogger<InitCommands> logger)
 {
-    public async Task Init()
-    {
-        Console.WriteLine("Initializing GitSharp repository...");
-        
-        CreateDirectories();
+    private readonly GitSharpConfiguration _gitSharpConfiguration = gitSharpConfiguration.Value;
 
-        await commitBuilder.CreateCommit("initial commit", true);
-        
-        Console.WriteLine("GitSharp repository initialized.");
-    }
-    
-    private static void CreateDirectories()
+    public void Init()
     {
-        if (Directory.Exists(".gitsharp")) return;
-        
-        Directory.CreateDirectory(".gitsharp");
-        Directory.CreateDirectory(".gitsharp/objects");
-        Directory.CreateDirectory(".gitsharp/refs");
-        Directory.CreateDirectory(".gitsharp/refs/heads");
-        Directory.CreateDirectory(".gitsharp/refs/remotes");
-        Directory.CreateDirectory(".gitsharp/refs/tags");
+        // Create all folders.
+        Directory.CreateDirectory(directoryService.GetPath(_gitSharpConfiguration.GitSharpDirectoryName, "objects"));
+        Directory.CreateDirectory(directoryService.GetPath(_gitSharpConfiguration.GitSharpDirectoryName, "refs", "heads"));
+        Directory.CreateDirectory(directoryService.GetPath(_gitSharpConfiguration.GitSharpDirectoryName, "refs", "remotes"));
+        Directory.CreateDirectory(directoryService.GetPath(_gitSharpConfiguration.GitSharpDirectoryName, "refs", "test"));
+
+        logger.LogInformation("Initialized GitSharp repository");
     }
 }
