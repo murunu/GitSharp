@@ -1,5 +1,5 @@
-﻿using GitSharp.Services.Interfaces;
-using GitSharp.Services.Models;
+﻿using GitSharp.Models;
+using GitSharp.Services.Interfaces;
 
 namespace GitSharp.Services.Implementations;
 

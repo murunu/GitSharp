@@ -1,4 +1,4 @@
-﻿using GitSharp.Services.Models;
+﻿using GitSharp.Models;
 
 namespace GitSharp.Services.Interfaces;
 

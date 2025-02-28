@@ -1,6 +1,6 @@
 ﻿using Cocona;
+using GitSharp.Models;
 using GitSharp.Services.Interfaces;
-using GitSharp.Services.Models;
 using Microsoft.Extensions.Logging;
 
 namespace GitSharp.Commands;

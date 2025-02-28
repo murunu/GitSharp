@@ -13,4 +13,8 @@
             <_Parameter1>GitSharp.Test</_Parameter1>
         </AssemblyAttribute>
     </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\GitSharp.Serializers\GitSharp.Serializers.csproj" />
+    </ItemGroup>
 </Project>

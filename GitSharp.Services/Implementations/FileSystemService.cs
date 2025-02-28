@@ -1,9 +1,9 @@
 ﻿using System.IO.Compression;
 using System.Text;
+using GitSharp.Models;
 using GitSharp.Services.Configuration;
 using GitSharp.Services.Exceptions;
 using GitSharp.Services.Interfaces;
-using GitSharp.Services.Models;
 using Microsoft.Extensions.Options;
 
 namespace GitSharp.Services.Implementations;

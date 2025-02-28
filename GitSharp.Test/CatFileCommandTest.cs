@@ -1,5 +1,5 @@
 ﻿using GitSharp.Commands;
-using GitSharp.Services.Models;
+using GitSharp.Models;
 using GitSharp.Test.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 using Shouldly;

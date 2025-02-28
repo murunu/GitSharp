@@ -1,4 +1,4 @@
-﻿namespace GitSharp.Services.Models;
+﻿namespace GitSharp.Models;
 
 public class TreeEntry
 {
