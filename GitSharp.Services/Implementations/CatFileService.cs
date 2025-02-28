@@ -5,12 +5,12 @@ namespace GitSharp.Services.Implementations;
 
 public class CatFileService(IFileSystemService fileSystemService) : ICatFileService
 {
-    public async Task<FileTypes> GetObjectTypeAsync(string hash)
+    public async Task<FileType> GetObjectTypeAsync(string hash)
     {
         var content = await fileSystemService.GetContentFromHashAsync(hash);
 
         var type = content.Split(" ")[0];
-        return Enum.Parse<FileTypes>(type, true);
+        return Enum.Parse<FileType>(type, true);
     }
 
     public async Task<long> GetSizeAsync(string hash)

@@ -4,5 +4,5 @@ namespace GitSharp.Services.Interfaces;
 
 public interface IHashObjectService
 {
-    Task<string> HashObject(string path, FileTypes type = FileTypes.Blob, bool write = false);
+    Task<string> HashObject(string path, FileType type = FileType.Blob, bool write = false);
 }

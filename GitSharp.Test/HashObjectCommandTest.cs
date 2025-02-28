@@ -18,7 +18,7 @@ public class HashObjectCommandTest(GitSharpFixture fixture) : TestBase(fixture)
         // Act
         var hashObjectCommand = ServiceProvider.GetRequiredService<HashObjectCommands>();
 
-        var result = await hashObjectCommand.HashObject(true, FileTypes.Blob, "test.txt");
+        var result = await hashObjectCommand.HashObject(true, FileType.Blob, "test.txt");
 
         // Assert
         result.ShouldBe("0a0a9f2a6772942557ab5355d76af442f8f65e01");
@@ -42,7 +42,7 @@ public class HashObjectCommandTest(GitSharpFixture fixture) : TestBase(fixture)
         // Act & Assert
         await hashObjectCommand.HashObject(
             true,
-            FileTypes.Blob,
+            FileType.Blob,
             "non-existing file.txt")
             .ShouldThrowAsync<FileNotFoundException>();
     }

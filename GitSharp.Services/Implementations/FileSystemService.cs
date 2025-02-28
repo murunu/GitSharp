@@ -43,7 +43,7 @@ public class FileSystemService(IDirectoryService directoryService, IOptions<GitS
         return File.OpenRead(path);
     }
 
-    public async Task WriteObjectAsync(string hash, FileTypes fileType, Stream stream)
+    public async Task WriteObjectAsync(string hash, FileType fileType, Stream stream)
     {
         if (!directoryService.IsInitialized)
         {

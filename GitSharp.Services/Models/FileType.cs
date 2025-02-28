@@ -1,6 +1,6 @@
 ﻿namespace GitSharp.Services.Models;
 
-public enum FileTypes
+public enum FileType
 {
     Commit,
     Tree,

@@ -10,12 +10,12 @@ public class HashObjectCommands(IHashObjectService hashObjectService, ILogger<Ha
     [Command("hash-object", Description = "Compute object ID and optionally creates a blob from a file")]
     public async Task<string> HashObject(
         [Option('w', Description = "Actually write the object into the object database.")] bool write,
-        [Option('t', Description = "Specify the type of object to be created (default: \"blob\").")] FileTypes? type,
+        [Option('t', Description = "Specify the type of object to be created (default: \"blob\").")] FileType? type,
         [Argument("path", Description = "Hash object as if it were located at the given path.")] string file)
     {
         logger.LogDebug("Hashing object from file {File}", file);
 
-        var result = await hashObjectService.HashObject(file, type ?? FileTypes.Blob, write);
+        var result = await hashObjectService.HashObject(file, type ?? FileType.Blob, write);
 
         logger.LogInformation("{Result}", result);
 

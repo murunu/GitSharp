@@ -17,7 +17,7 @@ public class CatFileCommandTest(GitSharpFixture fixture) : TestBase(fixture)
 
         var hashObjectCommand = ServiceProvider.GetRequiredService<HashObjectCommands>();
 
-        var hash = await hashObjectCommand.HashObject(true, FileTypes.Blob, "test.txt");
+        var hash = await hashObjectCommand.HashObject(true, FileType.Blob, "test.txt");
 
         // Act
         var catFileCommand = ServiceProvider.GetRequiredService<CatFileCommands>();
@@ -37,7 +37,7 @@ public class CatFileCommandTest(GitSharpFixture fixture) : TestBase(fixture)
 
         var hashObjectCommand = ServiceProvider.GetRequiredService<HashObjectCommands>();
 
-        var hash = await hashObjectCommand.HashObject(true, FileTypes.Blob, "test.txt");
+        var hash = await hashObjectCommand.HashObject(true, FileType.Blob, "test.txt");
 
         // Act
         var catFileCommand = ServiceProvider.GetRequiredService<CatFileCommands>();
@@ -45,7 +45,7 @@ public class CatFileCommandTest(GitSharpFixture fixture) : TestBase(fixture)
         var result = await catFileCommand.CatFile(hash, true, false, false);
 
         // Assert
-        result.ShouldBe(FileTypes.Blob.ToString());
+        result.ShouldBe(FileType.Blob.ToString());
     }
 
     [Fact]
@@ -61,7 +61,7 @@ public class CatFileCommandTest(GitSharpFixture fixture) : TestBase(fixture)
 
         var hashObjectCommand = ServiceProvider.GetRequiredService<HashObjectCommands>();
 
-        var hash = await hashObjectCommand.HashObject(true, FileTypes.Blob, "test.txt");
+        var hash = await hashObjectCommand.HashObject(true, FileType.Blob, "test.txt");
 
         // Act
         var catFileCommand = ServiceProvider.GetRequiredService<CatFileCommands>();

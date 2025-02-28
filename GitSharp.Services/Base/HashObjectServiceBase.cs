@@ -10,7 +10,7 @@ public abstract class HashObjectServiceBase(
     ILogger<HashObjectServiceBase> logger
     ) : IHashObjectService
 {
-    public async Task<string> HashObject(string path, FileTypes type = FileTypes.Blob, bool write = false)
+    public async Task<string> HashObject(string path, FileType type = FileType.Blob, bool write = false)
     {
         if (!File.Exists(directoryService.GetPath(path)))
         {

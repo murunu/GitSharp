@@ -4,7 +4,7 @@ namespace GitSharp.Services.Interfaces;
 
 public interface IFileSystemService
 {
-    Task WriteObjectAsync(string hash, FileTypes fileType, Stream stream);
+    Task WriteObjectAsync(string hash, FileType fileType, Stream stream);
 
     Task<string> ReadObjectAsync(string hash);
 
