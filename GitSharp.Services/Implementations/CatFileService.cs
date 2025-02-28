@@ -12,7 +12,7 @@ public class CatFileService(IFileSystemService fileSystemService) : ICatFileServ
         var type = content.Split(" ")[0];
         return Enum.Parse<FileTypes>(type, true);
     }
-    
+
     public async Task<long> GetSizeAsync(string hash)
     {
         await using var stream = fileSystemService.GetStream(hash);

@@ -18,7 +18,7 @@ public static class ServiceCollectionExtensions
 
             var gitSharpConfiguration = configuration.GetSection("GitSharp").Get<GitSharpConfiguration>();
 
-            if (gitSharpConfiguration is {UseSha2: true})
+            if (gitSharpConfiguration is { UseSha2: true })
             {
                 services.AddSha2HashObjectService();
             }
@@ -26,7 +26,7 @@ public static class ServiceCollectionExtensions
         else
         {
             services.Configure<GitSharpConfiguration>(_ => { });
-            
+
             services.AddSha1HashObjectService();
         }
 
@@ -36,7 +36,7 @@ public static class ServiceCollectionExtensions
 
         return services;
     }
-    
+
     private static void AddSha1HashObjectService(this IServiceCollection services)
     {
         services.AddSingleton<IHashObjectService, Sha1HashObjectService>();

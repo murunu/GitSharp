@@ -8,7 +8,7 @@ namespace GitSharp.Commands;
 public class InitCommands(IOptions<GitSharpConfiguration> gitSharpConfiguration, IDirectoryService directoryService, ILogger<InitCommands> logger)
 {
     private readonly GitSharpConfiguration _gitSharpConfiguration = gitSharpConfiguration.Value;
-    
+
     public void Init()
     {
         // Create all folders.

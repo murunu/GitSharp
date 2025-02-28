@@ -14,7 +14,7 @@ public class DirectoryService(IOptions<GitSharpConfiguration> gitSharpConfigurat
     private readonly GitSharpConfiguration _gitSharpConfiguration = gitSharpConfiguration.Value;
 
     public string GetPath(params string[] paths)
-        => Path.Combine([Directory.GetCurrentDirectory(), ..paths]);
+        => Path.Combine([Directory.GetCurrentDirectory(), .. paths]);
 
     public bool IsInitialized =>
         Directory.Exists(GetPath(_gitSharpConfiguration.GitSharpDirectoryName))

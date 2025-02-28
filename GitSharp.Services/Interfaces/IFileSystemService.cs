@@ -9,6 +9,6 @@ public interface IFileSystemService
     Task<string> ReadObjectAsync(string hash);
 
     Task<string> GetContentFromHashAsync(string hash);
-    
+
     Stream GetStream(string hash);
 }
