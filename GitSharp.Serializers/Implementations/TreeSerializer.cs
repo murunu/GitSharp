@@ -1,5 +1,6 @@
 ﻿using GitSharp.Models;
 using GitSharp.Serializers.Interfaces;
+using GitSharp.Serializers.Parsable;
 using OutParsing;
 
 namespace GitSharp.Serializers.Implementations;
@@ -16,17 +17,16 @@ internal class TreeSerializer : ITreeSerializer
                 line,
                 "{mode} {type} {hash}\t{name}",
                 out string mode,
-                out string type,
+                out ParsableFileType type,
                 out string hash,
                 out string name);
 
-            var fileType = Enum.Parse<FileType>(type, ignoreCase: true);
             var modeType = Enum.Parse<Mode>(mode, ignoreCase: true);
             
             tree.TreeEntries.Add(
                 new TreeEntry
                 {
-                    Type = fileType,
+                    Type = type.Value,
                     Hash = hash,
                     Name = name,
                     Mode = modeType
